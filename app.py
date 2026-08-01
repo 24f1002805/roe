@@ -13,7 +13,10 @@ def get_client():
     if not api_key:
         raise ValueError("OPENAI_API_KEY is not configured.")
 
-    return OpenAI(api_key=api_key)
+    return OpenAI(
+        api_key=api_key,
+        base_url="https://aipipe.org/openrouter/v1"
+    )
 
 
 PROMPTS = {
@@ -219,7 +222,7 @@ def analyze():
         client = get_client()
 
         response = client.responses.create(
-            model="gpt-5-mini",
+            model="openai/gpt-4.1-nano",
             input=prompt
         )
 
